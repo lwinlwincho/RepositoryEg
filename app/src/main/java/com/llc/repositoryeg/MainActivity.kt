@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.llc.repositoryeg.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

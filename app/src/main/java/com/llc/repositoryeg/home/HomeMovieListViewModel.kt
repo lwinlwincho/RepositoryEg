@@ -7,10 +7,15 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.llc.repositoryeg.MovieRepository
 import com.llc.repositoryeg.model.MovieModel
 import com.llc.repositoryeg.repository.RepositoryApplication
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import javax.inject.Inject
 
-class HomeMovieListViewModel(private var movieRepository: MovieRepository)  : ViewModel() {
+@HiltViewModel
+class HomeMovieListViewModel @Inject constructor(
+    private var movieRepository: MovieRepository) :
+    ViewModel() {
 
     private val _nowShowingUiEvent = MutableLiveData<MovieUpcomingEvent>()
     val nowShowingUiEvent: LiveData<MovieUpcomingEvent> = _nowShowingUiEvent
@@ -30,11 +35,12 @@ class HomeMovieListViewModel(private var movieRepository: MovieRepository)  : Vi
         viewModelScope.launch {
             try {
                 //get data from web server
-               // val result = MovieAPI.retrofitService.getNowPlaying().results.sortedByDescending { it.releaseDate }
+                // val result = MovieAPI.retrofitService.getNowPlaying().results.sortedByDescending { it.releaseDate }
 
-               // val marsPhotosRepository = DefaultMovieRepository()
+                // val marsPhotosRepository = DefaultMovieRepository()
 
-                val result = movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
+                val result =
+                    movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Success(result)
             } catch (e: Exception) {
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())
@@ -48,8 +54,8 @@ class HomeMovieListViewModel(private var movieRepository: MovieRepository)  : Vi
         viewModelScope.launch {
             try {
                 //get data from web server
-               /* val popularResult =
-                    MovieAPI.retrofitService.getPopular().results.sortedByDescending { it.vote_average }*/
+                /* val popularResult =
+                     MovieAPI.retrofitService.getPopular().results.sortedByDescending { it.vote_average }*/
 
                 val popularResult =
                     movieRepository.getPopularMovies().results.sortedByDescending { it.vote_average }
@@ -61,7 +67,6 @@ class HomeMovieListViewModel(private var movieRepository: MovieRepository)  : Vi
         }
     }
 }
-
 
 //You can store many data class and singleton obj in sealed class
 sealed class MovieUpcomingEvent {

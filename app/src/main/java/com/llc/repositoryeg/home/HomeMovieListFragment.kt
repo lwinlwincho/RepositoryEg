@@ -15,8 +15,9 @@ import com.llc.repositoryeg.databinding.FragmentHomeMovieListBinding
 import com.llc.repositoryeg.model.MovieModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeMovieListFragment : Fragment() {
+
     private val viewModel: HomeMovieListViewModel by viewModels()
 
     private var _binding: FragmentHomeMovieListBinding? = null
