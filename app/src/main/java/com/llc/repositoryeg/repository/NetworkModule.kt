@@ -1,51 +1,24 @@
+package com.llc.repositoryeg.repository
 
-package com.llc.repositoryeg
-
-import retrofit2.Retrofit
+import com.llc.repositoryeg.BuildConfig
+import com.llc.repositoryeg.network.MOVIE_BASE_URL
 import com.llc.repositoryeg.network.MovieAPIService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.converter.moshi.MoshiConverterFactory
+import dagger.hilt.components.SingletonComponent
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
-interface AppContainer {
-    val movieRepository: MovieRepository
-}
-
-class DefaultAppContainer : AppContainer {
-
-     val MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie/"
-
-    /*private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-
-    private val retrofit: Retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .baseUrl(MOVIE_BASE_URL)
-        .build()
-
-    private val retrofitService: MovieAPIService by lazy {
-        retrofit.create(MovieAPIService::class.java)
-    }
-
-    /**
-     * DI implementation for Mars photos repository
-     */
-    override val movieRepository: MovieRepository by lazy {
-        //NetworkMarsPhotosRepository(retrofitService)
-        DefaultMovieRepository(retrofitService)
-    }*/
-
-
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
 
     @Provides
     @Singleton
@@ -86,23 +59,6 @@ class DefaultAppContainer : AppContainer {
     @Provides
     @Singleton
     fun provideMovieAPIService(retrofit: Retrofit): MovieAPIService {
-       // return retrofit.create(MovieAPIService::class.java)
-        var retrofitService=retrofit.create(MovieAPIService::class.java)
-        return retrofitService
+        return retrofit.create(MovieAPIService::class.java)
     }
-
-    override val movieRepository: MovieRepository
-        get() = TODO("Not yet implemented")
-
-}
-
-
-@Module
-@InstallIn(ActivityComponent::class)
-abstract class AppContainerModule {
-
-    @Binds
-    abstract fun bindAppContainer(
-        detaultAppContainer: DefaultAppContainer
-    ): AppContainer
 }

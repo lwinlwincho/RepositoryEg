@@ -12,8 +12,8 @@ import retrofit2.http.Query
 private const val API_KEY = "9c9e4b9082cd70edd1ed7afab4f198b6"
 const val IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
 
-/*const val MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie/"
-
+const val MOVIE_BASE_URL = "https://api.themoviedb.org/3/movie/"
+/*
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()

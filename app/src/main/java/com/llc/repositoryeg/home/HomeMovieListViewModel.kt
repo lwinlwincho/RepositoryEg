@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.llc.repositoryeg.MovieRepository
 import com.llc.repositoryeg.model.MovieModel
+import com.llc.repositoryeg.model.MoviesResponseModel
 import com.llc.repositoryeg.repository.RepositoryApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeMovieListViewModel @Inject constructor(
-    private var movieRepository: MovieRepository) :
+    private var movieRepository: MoviesResponseModel<MovieModel>) :
     ViewModel() {
 
     private val _nowShowingUiEvent = MutableLiveData<MovieUpcomingEvent>()
@@ -39,8 +40,8 @@ class HomeMovieListViewModel @Inject constructor(
 
                 // val marsPhotosRepository = DefaultMovieRepository()
 
-                val result =
-                    movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
+                val result =movieRepository
+                    //movieRepository.getNowShowingMovies().results.sortedByDescending { it.releaseDate }
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Success(result)
             } catch (e: Exception) {
                 _nowShowingUiEvent.value = MovieUpcomingEvent.Failure(e.message.toString())

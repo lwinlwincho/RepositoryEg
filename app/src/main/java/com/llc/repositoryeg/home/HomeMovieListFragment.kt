@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.llc.moviebd.ui.home.now_showing.NowShowingItemAdapter
 import com.llc.moviebd.ui.home.popular.PopularItemAdapter
-import com.llc.repositoryeg.DefaultMovieRepository
-import com.llc.repositoryeg.MovieRepository
 import com.llc.repositoryeg.databinding.FragmentHomeMovieListBinding
 import com.llc.repositoryeg.model.MovieModel
 import dagger.hilt.android.AndroidEntryPoint
