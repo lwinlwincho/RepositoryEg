@@ -1,4 +1,4 @@
-package com.llc.repositoryeg.repository
+package com.llc.repositoryeg
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

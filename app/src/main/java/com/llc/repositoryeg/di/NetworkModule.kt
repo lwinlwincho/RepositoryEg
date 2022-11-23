@@ -1,4 +1,4 @@
-package com.llc.repositoryeg.repository
+package com.llc.repositoryeg.di
 
 import com.llc.repositoryeg.BuildConfig
 import com.llc.repositoryeg.network.MOVIE_BASE_URL
